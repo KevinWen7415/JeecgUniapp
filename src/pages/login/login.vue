@@ -75,9 +75,9 @@
           <wd-button v-if="loginWay == 2" plain hairline @click="toggleLoginWay(1)">
             账户登录
           </wd-button>
-          <wd-button v-else custom-class="align-top" plain hairline @click="toggleLoginWay(2)">
-            短信登录
-          </wd-button>
+<!--          <wd-button v-else custom-class="align-top" plain hairline @click="toggleLoginWay(2)">-->
+<!--            短信登录-->
+<!--          </wd-button>-->
         </view>
       </view>
       <wd-notify />

@@ -150,6 +150,8 @@ const goTo = (name) => {
 //加载首页配置
 const homeConfig = async () => {
   const indexRouteList = cache(APP_ROUTE);
+  console.log('------------------homeConfig--------')
+  console.log(indexRouteList)
   const appConfig = cache(APP_CONFIG);
   nextTick(() => {
     usList.value = indexRouteList.filter((item) => item.type == 'common').map(item=>{

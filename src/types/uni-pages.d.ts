@@ -8,6 +8,8 @@ interface NavigateToOptions {
        "/pages/about/about" |
        "/pages/annotation/annotationDetail" |
        "/pages/annotation/annotationList" |
+       "/pages/custom/CustomCompanySceneForm" |
+       "/pages/custom/CustomCompanySceneList" |
        "/pages/demo/demo" |
        "/pages/demo/form" |
        "/pages/demo/indexBar" |

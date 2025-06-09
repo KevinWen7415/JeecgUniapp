@@ -91,6 +91,24 @@
       }
     },
     {
+      "path": "pages/custom/CustomCompanySceneForm",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "custom_company_scene"
+      }
+    },
+    {
+      "path": "pages/custom/CustomCompanySceneList",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "custom_company_scene",
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/demo/demo",
       "type": "page",
       "layout": "default",

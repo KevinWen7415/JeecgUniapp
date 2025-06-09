@@ -116,7 +116,13 @@ const goPage = (item) => {
       uni.navigateTo({
         url: '/pages/check/designForm/designForm?item=' + encodeURIComponent(JSON.stringify(real)),
       })
-    } else {
+    } else if(page.indexOf('customCompanyScene') == 0){
+
+      uni.navigateTo({
+        url: '/pages/custom/CustomCompanySceneList',
+      })
+    }
+    else {
       if (!hasRoute({ name: page })) {
         router.replace({ name: 'demo', params: { backRouteName: 'index', routeMethod: 'pushTab' } })
       } else {
@@ -198,8 +204,11 @@ const homeConfig = async () => {
 const goPageMore = (page) => {
   router.replace({ name: 'more', params: { backRouteName: 'index', type: page } })
 }
+
 onLoad(() => {
   console.log('index页面：onLoad')
+  // goTo('/pages/custom/CustomCompanySceneList')
+  goPage({routeIndex:'customCompanyScene'});
 })
 onReady(() => {
   console.log('index页面：onReady')

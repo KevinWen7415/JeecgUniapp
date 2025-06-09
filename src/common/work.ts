@@ -18,6 +18,14 @@ export const us = {
       enabled: true,
     },
     {
+      title: '客户现场',
+      icon: icon_prefix + 'qingjia1.png',
+      description: 'Custom Company Scene',
+      useCount: 10000,
+      routeIndex: 'customCompanyScene',
+      enabled: true,
+    },
+    {
       title: '仪表盘',
       icon: icon_prefix + 'chart.png',
       description: '仪表盘',

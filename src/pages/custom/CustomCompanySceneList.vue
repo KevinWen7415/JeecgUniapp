@@ -8,7 +8,7 @@ navigationStyle: 'custom',
 }
 </route>
 <template>
-  <PageLayout navTitle="客户现场"  backRouteName="index" routeMethod="pushTab">
+  <PageLayout navTitle="客户现场"  backRouteName="CustomCompanySceneList" routeMethod="pushTab" @navBack="handleExitCustomScene">
     <view class="wrap">
       <z-paging
           ref="paging"
@@ -45,7 +45,11 @@ import { ref, onMounted, computed } from 'vue'
 import { http } from '@/utils/http'
 import usePageList from '@/hooks/usePageList'
 import {columns} from './CustomCompanySceneData';
-import Popup from '@/components/Popup/Popup.vue' // 导入 Popup 组件
+import Popup from '@/components/Popup/Popup.vue'
+import { useMessage } from "wot-design-uni";
+import { useUserStore } from "@/store"; // 导入 Popup 组件
+const userStore = useUserStore()
+const message = useMessage()
 defineOptions({
   name: 'CustomCompanySceneList',
   components: {
@@ -86,6 +90,18 @@ const handleEdit = (record) => {
     name: 'CustomCompanySceneForm',
     params: {dataId: record.id},
   })
+}
+
+const handleExitCustomScene = () =>{
+  message
+    .confirm({
+      title: '提示',
+      msg: '确定退出吗？',
+    })
+    .then(() => {
+      userStore.clearUserInfo()
+      router.replaceAll({ name: 'login' })
+    })
 }
 
 onMounted(() => {

@@ -52,7 +52,11 @@ const props = defineProps({
 })
 
 // 定义 emits
-const emit = defineEmits(['change', 'update:value'])
+const emit = defineEmits([
+  'change',
+  'update:value',
+  'upload-success' // 新增事件
+])
 // 定义响应式数据
 const fileList = ref([])
 /**
@@ -89,8 +93,21 @@ const customUpload: UploadMethod = (file, formData, options) => {
             path: data.message,
             url: getFileAccessHttpUrl(data.message),
           }
-          fileList.value.unshift(file)
-          changeOnlineFormValue()
+          if (props.maxNum && props.maxNum > 1){
+            fileList.value.unshift(file)
+          }else {
+            fileList.value = [file]
+          }
+          changeOnlineFormValue();
+          // 触发上传成功事件
+          emit('upload-success', {
+            file,
+            fileList: [...fileList.value],
+            response: data
+          })
+        }else {
+          // toast.error(data.message)
+          options.onError({ ...res, errMsg: res.errMsg || '' }, file, formData)
         }
       } else {
         // 设置上传失败

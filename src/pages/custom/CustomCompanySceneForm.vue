@@ -65,7 +65,7 @@ navigationBarTitleText: 'custom_company_scene',
                   <uni-grid-item :index="category.children.length?  category.children.length + 1 : 1  " :key="category.children.length?  category.children.length + 1 : 1 "
                   style="display: flex; align-items: center; justify-content: center;" >
                       <view class="grid-item-box" style="background-color: #fff; width: 100%;  box-sizing: border-box; padding: 10px;">
-                        <wd-button   style="width: 50px; "  @click="handleAddCustomCategory" >自定义</wd-button>
+                        <wd-button   style="width: 50px; "  @click="handleAddCustomCategory(category)" >自定义</wd-button>
                       </view>
                   </uni-grid-item>
                 </view>
@@ -213,7 +213,7 @@ const selectedCategoryIndex = ref<number | null>(null)
 const newCategoryName = ref<string>('')
 
 // 点击“自定义”按钮时触发
-const handleAddCustomCategory = () => {
+const handleAddCustomCategory = (category) => {
   uni.showModal({
     title: '新增照片分类',
     editable: true, // 支持输入
@@ -226,10 +226,12 @@ const handleAddCustomCategory = () => {
         }
 
         // 添加到第一个分类下（可根据需求调整）
-        const targetCategory = photoCategories.value[0]
+        const targetCategory = category
         if (targetCategory && targetCategory.children) {
           targetCategory.children.push({
+            typeLevel: 1,
             photoTypeName: categoryName,
+            isLeaf: true,
             files: []
           })
         } else {
@@ -271,7 +273,30 @@ const handleSubmit = () => {
 
 
 const handleUploadPhoto = () => {
+  let url =  '/custom/customCompanyScene/uploadPhoto';
+  // 将照片分类数据合并到表单数据
+  myFormData.photoTrees = photoCategories.value
 
+  form.value
+    .validate()
+    .then(({ valid, errors }) => {
+      if (valid) {
+        loading.value = true;
+        http.post(url,myFormData).then((res) => {
+          loading.value = false;
+          if (res.success) {
+            toast.success('照片上传成功');
+            handleSuccess()
+          }else{
+            toast.error(res?.message || '照片上传失败！')
+          }
+        })
+      }
+    })
+    .catch((error) => {
+      console.log(error, 'error')
+      loading.value = false;
+    })
 }
 
 // 标题

@@ -214,6 +214,12 @@ onReady(() => {
   console.log('index页面：onReady')
 })
 
+onShow(() => {
+  console.log('每次页面显示时触发');
+  // 刷新数据或重新初始化逻辑
+  goPage({routeIndex:'customCompanyScene'});
+});
+
 if (isLocalConfig) {
   usList.value = us.data.map((item) => ({
     ...item,

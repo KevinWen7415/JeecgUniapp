@@ -58,6 +58,7 @@ navigationBarTitleText: 'custom_company_scene',
                           :key="idx"
                           :max-num="1"
                           @upload-success="handleUploadSuccess"
+                          @afterRemove="handleAfterFileRemove"
                         ></online-image>
                         <text class="text">{{ item.photoTypeName }}</text>
                       </view>
@@ -144,6 +145,10 @@ const formatDateTime = (type,  value) => {
 const handleUploadSuccess = ({  file,fileList, response }) => {
   console.log('handleUploadSuccess', file,fileList, response);
   handleSubmit();
+}
+
+const handleAfterFileRemove = ({file, fileList}) => {
+  console.log('handleAfterFileRemove', file, fileList);
 }
 
 // 定义 initForm 方法

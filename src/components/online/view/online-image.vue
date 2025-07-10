@@ -55,7 +55,8 @@ const props = defineProps({
 const emit = defineEmits([
   'change',
   'update:value',
-  'upload-success' // 新增事件
+  'upload-success', // 新增事件
+  'afterRemove'
 ])
 // 定义响应式数据
 const fileList = ref([])
@@ -145,6 +146,10 @@ const delFile = ({ file, delFileList, resolve }) => {
         console.log('当前删除文件', file);
         fileList.value = fileList.value.filter((item) => item.path !== file.path);
         changeOnlineFormValue()
+        emit('afterRemove', {
+          file,
+          fileList: [...fileList.value]
+        });
         toast.success('删除成功')
         resolve(true)
       }

@@ -57,6 +57,7 @@ navigationBarTitleText: 'custom_company_scene',
                           :name="item.photoTypeName"
                           :key="idx"
                           :max-num="1"
+                          @upload-success="handleUploadSuccess"
                         ></online-image>
                         <text class="text">{{ item.photoTypeName }}</text>
                       </view>
@@ -140,6 +141,11 @@ const formatDateTime = (type,  value) => {
   return formatDateTimeWithSeconds(value);
 }
 
+const handleUploadSuccess = ({  file,fileList, response }) => {
+  console.log('handleUploadSuccess', file,fileList, response);
+  handleSubmit();
+}
+
 // 定义 initForm 方法
 const initForm = (item) => {
   console.log('initForm item', item)
@@ -203,7 +209,7 @@ const covertPhotoTypeTreeToDataTree = (photoTree)=>{
 
 const handleSuccess = () => {
   uni.$emit('refreshList');
-  router.back()
+  // router.back()
 }
 
 // 当前选中的分类索引
@@ -244,6 +250,7 @@ const handleAddCustomCategory = (category) => {
 
 // 提交表单
 const handleSubmit = () => {
+  console.log('handleSubmit', myFormData)
   let url = dataId.value?'/custom/customCompanyScene/edit':'/custom/customCompanyScene/add';
 
   // 将照片分类数据合并到表单数据

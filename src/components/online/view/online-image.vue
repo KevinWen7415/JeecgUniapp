@@ -134,7 +134,7 @@ const changeOnlineFormValue = () => {
   emit('update:value', str)
 }
 
-const delFile = ({ file, fileList, resolve }) => {
+const delFile = ({ file, delFileList, resolve }) => {
   uni.showModal({
     title: '提示',
     content: '确定要删除吗？',
@@ -142,7 +142,8 @@ const delFile = ({ file, fileList, resolve }) => {
     confirmText: '确定',
     success: (res) => {
       if (res.confirm) {
-        console.log('当前删除文件', file)
+        console.log('当前删除文件', file);
+        fileList.value = fileList.value.filter((item) => item.path !== file.path);
         changeOnlineFormValue()
         toast.success('删除成功')
         resolve(true)

@@ -98,7 +98,7 @@ import { getEnvBaseUploadUrl,getEnvBaseUrl } from '@/utils'
 import { isString } from '@/utils/is'
 import { formatDateTimeWithSeconds } from '@/utils/timeUtils'
 import OnlineImage from "@/components/online/view/online-image.vue";
-
+import _ from 'lodash'
 
 const toast = useToast()
 const VITE_UPLOAD_BASEURL = `${getEnvBaseUrl()}/sys/common/upload`
@@ -214,7 +214,12 @@ const covertPhotoTypeTreeToDataTree = (photoTree)=>{
 
 const handleSuccess = () => {
   uni.$emit('refreshList');
-  // router.back()
+  // router.back();
+  if (_.isEmpty(dataId.value)){
+    router.push({
+      name: 'CustomCompanySceneList'
+    })
+  }
 }
 
 // 当前选中的分类索引
